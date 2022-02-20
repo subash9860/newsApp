@@ -5,7 +5,7 @@
 - [x] If you haven’t already, take a [git class in codeschool](https://www.codeschool.com/courses/try-git).
 - [x] Once complete, create a private repo called “yipl-android-list-me”” in [bitbucket](https://bitbucket.org)
 - [ ] Solve the problem detailed below
-- [ ] Push your code to the repo (make sure that you have multiple commits with proper messages)
+- [x] Push your code to the repo (make sure that you have multiple commits with proper messages)
 - [ ] Invite internship-bitbucket@yipl.com.np to that particular private repo
 - [ ] Submit your application
 
@@ -17,7 +17,7 @@ Implement a simple listing and detail showcase application using the following A
 
 - [x] A screen to list all the posts.
   - <https://jsonplaceholder.typicode.com/posts>
-- [ ] A post detail screen which have list of comments.
+- [x] A post detail screen which have list of comments.
   - <https://jsonplaceholder.typicode.com/posts/{post_id}/comments>
 - [ ] Add new comment by using POST request to the api. You can use any static userId to make the request.
   - <https://jsonplaceholder.typicode.com/posts/{post_id}/comments>

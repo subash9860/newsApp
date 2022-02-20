@@ -63,7 +63,8 @@ class _PostsScreenState extends State<PostsScreen> {
                           contentPadding: const EdgeInsets.all(8),
                           onTap: () {
                             Navigator.pushNamed(
-                                context, PostDetailsScreen.routeName, arguments: posts.items[i].id);
+                                context, PostDetailsScreen.routeName,
+                                arguments: posts.items[i].id);
                           },
                           subtitle: Text(
                             posts.items[i].body,

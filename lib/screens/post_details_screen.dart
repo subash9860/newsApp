@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:yipl_android_list_me/providers/comments.dart';
 
+import '../providers/comments.dart';
 import '../providers/posts.dart';
 
 class PostDetailsScreen extends StatefulWidget {

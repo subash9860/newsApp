@@ -19,7 +19,7 @@ class Comments with ChangeNotifier {
     // If the server return a 200 OK response, parse the JSON.
     if (response.statusCode == 200) {
       final extractedData = json.decode(response.body);
-      
+
       final List<Comment> loadedComments = [];
 
       // Parse the JSON to a dart list of Comment objects

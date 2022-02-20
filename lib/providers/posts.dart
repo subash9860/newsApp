@@ -5,7 +5,6 @@ import 'package:http/http.dart' as http;
 
 import '../models/post.dart';
 
-
 const String baseUrl = 'https://jsonplaceholder.typicode.com';
 
 class Posts with ChangeNotifier {
