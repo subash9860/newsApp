@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../screens/post_details_screen.dart';
 import '../providers/posts.dart';
 
 class PostsScreen extends StatefulWidget {
@@ -28,7 +29,7 @@ class _PostsScreenState extends State<PostsScreen> {
               });
             });
       } catch (error) {
-        print(error);
+        // print(error);
         setState(() {
           justTry = true;
         });
@@ -60,8 +61,9 @@ class _PostsScreenState extends State<PostsScreen> {
                             style: Theme.of(context).textTheme.headline6,
                           ),
                           contentPadding: const EdgeInsets.all(8),
-                          onTap: (){
-                            // TODO: Navigate to post Details
+                          onTap: () {
+                            Navigator.pushNamed(
+                                context, PostDetailsScreen.routeName, arguments: posts.items[i].id);
                           },
                           subtitle: Text(
                             posts.items[i].body,

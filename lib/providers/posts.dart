@@ -39,4 +39,9 @@ class Posts with ChangeNotifier {
       throw Exception('Failed to load Posts');
     }
   }
+
+  Post findById(int id) {
+    return _items.firstWhere((element) => element.id == id);
+    // _items.firstWhereOrNull((index, element) => e)((prod) => prod.id == id);
+  }
 }
