@@ -42,6 +42,5 @@ class Posts with ChangeNotifier {
 
   Post findById(int id) {
     return _items.firstWhere((element) => element.id == id);
-    // _items.firstWhereOrNull((index, element) => e)((prod) => prod.id == id);
   }
 }
