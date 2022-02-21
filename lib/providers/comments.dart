@@ -11,6 +11,7 @@ class Comments with ChangeNotifier {
   List<Comment> _items = [];
 
   List<Comment> get items => [..._items];
+  int i = 6;
 
   Future<void> fetchComments(int postId) async {
     final response =
@@ -40,8 +41,37 @@ class Comments with ChangeNotifier {
     } else {
       // If the server did not return a 200 OK response,
       // then throw an exception.
-      throw Exception('Failed to load Posts');
+      throw Exception('Failed to load Comments');
     }
   }
-  // TODO: Add a function to add a new comment
+
+// Adding new comment by post method but jsonPlacehplder but doest not store the comment in the database
+
+  Future<void> addComment(int postId, String body) async {
+    final response = await http.post(
+      Uri.parse('https://jsonplaceholder.typicode.com/posts/$postId/comments'),
+      body: json.encode({
+        'id': i++,
+        'postId': postId,
+        'name': "Test",
+        'email': "test@mail.com",
+        'body': body,
+      }),
+    );
+
+    if (response.statusCode == 201) {
+      final newComment = Comment(
+        id: i++,
+        postId: postId,
+        name: "Test",
+        email: "test@mail.com",
+        body: body,
+      );
+      _items.add(newComment);
+      notifyListeners();
+    } else {
+      // print(response.statusCode);
+      throw Exception('Failed to add Comment');
+    }
+  }
 }
