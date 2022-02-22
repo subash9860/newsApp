@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:yipl_android_list_me/providers/users.dart';
-import 'package:yipl_android_list_me/screens/user_detail.dart';
+
+import '../providers/users.dart';
+import '../screens/user_detail.dart';
 
 class UserList extends StatefulWidget {
   const UserList({Key? key}) : super(key: key);

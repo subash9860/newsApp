@@ -16,7 +16,7 @@ class Albums with ChangeNotifier {
     if (response.statusCode == 200) {
       final extractedData = json.decode(response.body);
       final List<Album> loadedAlbum = [];
-      // iterate through the extracted data and create a Todo object for each one
+      // iterate through the extracted data and create a albums object for each one
       extractedData.forEach((todoData) {
         loadedAlbum.add(Album(
           id: todoData['id'],
@@ -27,7 +27,7 @@ class Albums with ChangeNotifier {
       _items = loadedAlbum;
       notifyListeners();
     } else {
-      throw Exception('Failed to load todos');
+      throw Exception('Failed to load albums');
     }
   }
 }

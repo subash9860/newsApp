@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../providers/photos.dart';
 import '../providers/todos.dart';
 import '../providers/users.dart';
 // import '../providers/comments.dart';
@@ -35,77 +36,98 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
     // for user's albums
     Provider.of<Albums>(context, listen: false).fetchAndSetAlbums(userID);
 
+    // for user's photos
+    Provider.of<Photos>(context, listen: false).fetchAndSetPhotos(userID);
+
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("User Details"),
-      ),
-      body: Column(
-        children: <Widget>[
-          const SizedBox(height: 10),
-          Text(
-            user.name,
-            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 10),
-          const Text("User Posts"),
+        appBar: AppBar(
+          title: const Text("User Details"),
+        ),
+        body: Column(
+          children: <Widget>[
+            const SizedBox(height: 10),
+            Text(
+              user.name,
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 10),
+            const Text("User Posts"),
 
-          // for user's posts
-          Expanded(
-            child: Consumer<Posts>(
-              builder: (ctx, posts, _) => ListView.builder(
-                itemCount: posts.itemsOfPostByUser.length,
-                itemBuilder: (ctx, i) => ListTile(
-                  // contentPadding: const EdgeInsets.all(10),
-                  title: Text(
-                    posts.itemsOfPostByUser[i].title,
-                    style: const TextStyle(
-                        fontSize: 22, fontWeight: FontWeight.bold),
-                  ),
-                  subtitle: Text(posts.itemsOfPostByUser[i].body),
-                ),
-              ),
-            ),
-          ),
-          // User's Todo List
-          const Text("User's Todo List"),
-          Expanded(
-            child: Consumer<Todos>(
-              builder: (ctx, users, _) => ListView.builder(
-                itemCount: users.items.length,
-                itemBuilder: (ctx, i) => ListTile(
-                  // contentPadding: const EdgeInsets.all(10),
-                  title: Text(
-                    users.items[i].title,
-                    style: const TextStyle(
-                        fontSize: 22, fontWeight: FontWeight.bold),
-                  ),
-                  subtitle: Text(users.items[i].completed.toString()),
-                ),
-              ),
-            ),
-          ),
+            // for user's posts
+            Expanded(
+                child: Consumer<Posts>(
+                    builder: (ctx, posts, _) => ListView.builder(
+                          itemCount: posts.itemsOfPostByUser.length,
+                          itemBuilder: (ctx, i) => ListTile(
+                            title: Text(
+                              posts.itemsOfPostByUser[i].title,
+                              style: const TextStyle(
+                                  fontSize: 22, fontWeight: FontWeight.bold),
+                            ),
+                            subtitle: Text(posts.itemsOfPostByUser[i].body),
+                          ),
+                        ))),
+            // User's Todo List
+            const Text("User's Todo List"),
+            Expanded(
+                child: Consumer<Todos>(
+                    builder: (ctx, users, _) => ListView.builder(
+                          itemCount: users.items.length,
+                          itemBuilder: (ctx, i) => ListTile(
+                            title: Text(
+                              users.items[i].title,
+                              style: const TextStyle(
+                                  fontSize: 22, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ))),
 
-          // User's Albums
-          const Text("User's Albums"),
-          Expanded(
-            child: Consumer<Albums>(
-              builder: (ctx, albums, _) => ListView.builder(
-                itemCount: albums.items.length,
-                itemBuilder: (ctx, i) => ListTile(
-                  // contentPadding: const EdgeInsets.all(10),
-                  title: Text(
-                    albums.items[i].title,
-                    style: const TextStyle(
-                        fontSize: 22, fontWeight: FontWeight.bold),
-                  ),
-                  subtitle: Text(albums.items[i].userId.toString()),
-                ),
-              ),
-            ),
-          ),
-          // User's Photos
-        ],
-      ),
-    );
+            // User's Albums
+            const Text("User's Albums"),
+            Expanded(
+                child: Consumer<Albums>(
+                    builder: (ctx, albums, _) => ListView.builder(
+                          itemCount: albums.items.length,
+                          itemBuilder: (ctx, i) => ListTile(
+                            // contentPadding: const EdgeInsets.all(10),
+                            title: Text(
+                              albums.items[i].title,
+                              style: const TextStyle(
+                                  fontSize: 22, fontWeight: FontWeight.bold),
+                            ),
+                            // subtitle: Text(albums.items[i].userId.toString()),
+                          ),
+                        ))),
+
+            // User's Photos
+            const Text("User's Photos"),
+            Expanded(
+                child: Consumer<Photos>(
+                    builder: (ctx, photos, _) => ListView.builder(
+                        itemCount: photos.items.length,
+                        itemBuilder: (ctx, i) => Stack(
+                              children: [
+                                SizedBox(
+                                  height: 180,
+                                  width: 180,
+                                  child: Image.network(
+                                    photos.items[i].thumbnailUrl,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                Positioned(
+                                    bottom: 0,
+                                    right: 0,
+                                    child: SizedBox(
+                                        height: 180,
+                                        width: 180,
+                                        child: Image.network(
+                                          photos.items[i].url,
+                                          fit: BoxFit.cover,
+                                        ))),
+                              ],
+                            )))),
+          ],
+        ));
   }
 }

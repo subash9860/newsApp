@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import './providers/photos.dart';
 import './providers/albums.dart';
 import './providers/todos.dart';
 import './screens/user_detail.dart';
@@ -26,8 +27,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(create: (_) => Comments()),
         ChangeNotifierProvider(create: (_) => Users()),
-        ChangeNotifierProvider(create: (_)=> Todos()),
-        ChangeNotifierProvider(create: (_)=> Albums())
+        ChangeNotifierProvider(create: (_) => Todos()),
+        ChangeNotifierProvider(create: (_) => Albums()),
+        ChangeNotifierProvider(create: (_) => Photos())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
