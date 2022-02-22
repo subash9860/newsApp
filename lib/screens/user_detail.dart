@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:yipl_android_list_me/providers/todos.dart';
 
 import '../providers/users.dart';
 // import '../providers/comments.dart';
@@ -26,7 +27,9 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
 
     // for user's posts
     Provider.of<Posts>(context, listen: false).fetchByUserID(userID);
-    // .findByUserId(userID);
+
+    // for user's todo list
+    Provider.of<Todos>(context, listen: false).fetchAndSetTodos(userID);
 
     return Scaffold(
       appBar: AppBar(
@@ -60,6 +63,23 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
             ),
           ),
           // User's Todo List
+          const Text("User's Todo List"),
+          Expanded(
+            child: Consumer<Todos>(
+              builder: (ctx, users, _) => ListView.builder(
+                itemCount: users.items.length,
+                itemBuilder: (ctx, i) => ListTile(
+                  contentPadding: const EdgeInsets.all(10),
+                  title: Text(
+                    users.items[i].title,
+                    style: const TextStyle(
+                        fontSize: 22, fontWeight: FontWeight.bold),
+                  ),
+                  subtitle: Text(users.items[i].completed.toString()),
+                ),
+              ),
+            ),
+          ),
           // User's Albums
           // User's Photos
         ],
