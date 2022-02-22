@@ -35,7 +35,7 @@ class Comments with ChangeNotifier {
         ));
       });
 
-      // Replace the posts list with the new one
+      // Replace the comment list with the new one
       _items = loadedComments;
       notifyListeners();
     } else {

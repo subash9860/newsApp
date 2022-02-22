@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import './screens/user_list.dart';
+import '../providers/users.dart';
 import './providers/comments.dart';
 import './providers/posts.dart';
-import '../screens/posts_screen.dart';
+// import '../screens/posts_screen.dart';
 import '../screens/post_details_screen.dart';
 
 void main() => runApp(const MyApp());
@@ -19,6 +21,7 @@ class MyApp extends StatelessWidget {
           create: (_) => Posts(),
         ),
         ChangeNotifierProvider(create: (_) => Comments()),
+        ChangeNotifierProvider(create: (_) => Users())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -32,9 +35,11 @@ class MyApp extends StatelessWidget {
                 displayColor: const Color.fromARGB(255, 0, 0, 0),
               ),
         ),
-        home: const PostsScreen(),
+        home: const UserList(),
+        //  const PostsScreen(),
         routes: {
           PostDetailsScreen.routeName: (ctx) => const PostDetailsScreen(),
+          // UserList.routeName: (ctx) => const UserList(),
         },
       ),
     );

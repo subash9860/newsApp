@@ -61,4 +61,4 @@ These are optional features. Implementing them will give you extra points.
 - [ ] The posts, albums and todos should be either in Tabs or BottomNavigation.
 - [ ] Implement add, delete, update of todos for user.
 
-- <https://jsonplaceholder.typicode.com/guide.html>
+- <https://jsonplaceholder.typicode.com/guide>
