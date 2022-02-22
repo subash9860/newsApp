@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:yipl_android_list_me/providers/todos.dart';
 
+import '../providers/todos.dart';
 import '../providers/users.dart';
 // import '../providers/comments.dart';
 import '../providers/posts.dart';
+import '../providers/albums.dart';
 
 class UserDetailsScreen extends StatefulWidget {
   const UserDetailsScreen({Key? key}) : super(key: key);
@@ -31,6 +32,9 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
     // for user's todo list
     Provider.of<Todos>(context, listen: false).fetchAndSetTodos(userID);
 
+    // for user's albums
+    Provider.of<Albums>(context, listen: false).fetchAndSetAlbums(userID);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("User Details"),
@@ -51,7 +55,7 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
               builder: (ctx, posts, _) => ListView.builder(
                 itemCount: posts.itemsOfPostByUser.length,
                 itemBuilder: (ctx, i) => ListTile(
-                  contentPadding: const EdgeInsets.all(10),
+                  // contentPadding: const EdgeInsets.all(10),
                   title: Text(
                     posts.itemsOfPostByUser[i].title,
                     style: const TextStyle(
@@ -69,7 +73,7 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
               builder: (ctx, users, _) => ListView.builder(
                 itemCount: users.items.length,
                 itemBuilder: (ctx, i) => ListTile(
-                  contentPadding: const EdgeInsets.all(10),
+                  // contentPadding: const EdgeInsets.all(10),
                   title: Text(
                     users.items[i].title,
                     style: const TextStyle(
@@ -80,7 +84,25 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
               ),
             ),
           ),
+
           // User's Albums
+          const Text("User's Albums"),
+          Expanded(
+            child: Consumer<Albums>(
+              builder: (ctx, albums, _) => ListView.builder(
+                itemCount: albums.items.length,
+                itemBuilder: (ctx, i) => ListTile(
+                  // contentPadding: const EdgeInsets.all(10),
+                  title: Text(
+                    albums.items[i].title,
+                    style: const TextStyle(
+                        fontSize: 22, fontWeight: FontWeight.bold),
+                  ),
+                  subtitle: Text(albums.items[i].userId.toString()),
+                ),
+              ),
+            ),
+          ),
           // User's Photos
         ],
       ),
