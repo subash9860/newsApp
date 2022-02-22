@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import './screens/user_detail.dart';
 import './screens/user_list.dart';
 import '../providers/users.dart';
 import './providers/comments.dart';
@@ -40,6 +41,7 @@ class MyApp extends StatelessWidget {
         routes: {
           PostDetailsScreen.routeName: (ctx) => const PostDetailsScreen(),
           // UserList.routeName: (ctx) => const UserList(),
+          UserDetailsScreen.routeName: (ctx) => const UserDetailsScreen(),
         },
       ),
     );

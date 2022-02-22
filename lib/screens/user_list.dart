@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yipl_android_list_me/providers/users.dart';
+import 'package:yipl_android_list_me/screens/user_detail.dart';
 
 class UserList extends StatefulWidget {
   const UserList({Key? key}) : super(key: key);
@@ -57,6 +58,12 @@ class _UserListState extends State<UserList> {
                       itemCount: users.items.length,
                       itemBuilder: (context, index) => ListTile(
                         title: Text(users.items[index].name),
+                        onTap: () {
+                          Navigator.of(context).pushNamed(
+                            UserDetailsScreen.routeName,
+                            arguments: users.items[index].id, 
+                            );
+                        },
                       ),
                     ),
                   ),

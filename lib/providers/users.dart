@@ -19,7 +19,7 @@ class Users with ChangeNotifier {
       final List<User> loadedUsers = [];
 
       // iterate through the extracted data and create a new User object
-      
+
       extractedData.forEach((userData) {
         loadedUsers.add(
           User(
@@ -59,5 +59,9 @@ class Users with ChangeNotifier {
       throw Exception('Failed to load users');
     }
     notifyListeners();
+  }
+  // filter users by id
+  User findById(int id) {
+    return _items.firstWhere((element) => element.id == id);
   }
 }
