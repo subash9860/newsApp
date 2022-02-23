@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import './constants/colors.dart';
+import './screens/home_screen.dart';
 import './providers/photos.dart';
 import './providers/albums.dart';
 import './providers/todos.dart';
 import './screens/user_detail.dart';
-import './screens/user_list.dart';
+// import './screens/user_list.dart';
 import '../providers/users.dart';
 import './providers/comments.dart';
 import './providers/posts.dart';
@@ -35,6 +37,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'List-Me',
         theme: ThemeData(
+          primaryColor: kPrimary,
           colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blueGrey)
               .copyWith(secondary: const Color.fromARGB(255, 145, 193, 233)),
           textTheme: Theme.of(context).textTheme.apply(
@@ -42,8 +45,12 @@ class MyApp extends StatelessWidget {
                 bodyColor: const Color.fromARGB(255, 0, 0, 0),
                 displayColor: const Color.fromARGB(255, 0, 0, 0),
               ),
+          appBarTheme:const AppBarTheme(
+            color:kPrimaryDark,
+          )
         ),
-        home: const UserList(),
+        home: const HomeScreen(),
+        // const UserList(),
         //  const PostsScreen(),
         routes: {
           PostDetailsScreen.routeName: (ctx) => const PostDetailsScreen(),

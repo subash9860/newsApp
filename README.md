@@ -43,22 +43,22 @@ Once loaded, the data (both listing and detail) should persist. Any persistence 
 #### Bonus points
 
 - [x] Proper state management
-- [ ] Use of proper animations.
-- [ ] If you write a readme file which contains screenshots and a short description of your application.
+- [x] Use of proper animations.
+- [x] If you write a readme file which contains screenshots and a short description of your application.
 - [x] Use of 3rd party libraries meaningfully.
 
 #### Extra features
 
 These are optional features. Implementing them will give you extra points.
 
-- [ ] Show list of users
+- [x] Show list of users
   - <https://jsonplaceholder.typicode.com/users>
-- [ ] Show the users posts, albums and photos.
+- [x] Show the users posts, albums and photos.
   - Posts: <https://jsonplaceholder.typicode.com/users/{user_id}/posts>
   - Todos: <https://jsonplaceholder.typicode.com/users/{user_id}/todos>
   - Albums: <https://jsonplaceholder.typicode.com/users/{user_id}/albums>
   - Photos: <https://jsonplaceholder.typicode.com/albums/{album_id}/photos>
-- [ ] The posts, albums and todos should be either in Tabs or BottomNavigation.
+- [x] The posts, albums and todos should be either in Tabs or BottomNavigation.
 - [ ] Implement add, delete, update of todos for user.
 
 - <https://jsonplaceholder.typicode.com/guide>
