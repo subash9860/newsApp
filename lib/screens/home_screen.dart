@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../screens/posts_screen.dart';
 // import '../screens/user_detail.dart';
 import '../screens/user_list.dart';
+import '../constants/colors.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -26,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       bottomNavigationBar: NavigationBarTheme(
         data: NavigationBarThemeData(
-          indicatorColor: Colors.blue.shade100,
+          indicatorColor: kPrimary,
           labelTextStyle: MaterialStateProperty.all<TextStyle>(
             const TextStyle(
               fontSize: 14,

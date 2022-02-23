@@ -17,7 +17,17 @@ class TopBarOfPosts extends StatefulWidget {
   State<TopBarOfPosts> createState() => _TopBarOfPostsState();
 }
 
-class _TopBarOfPostsState extends State<TopBarOfPosts> {
+class _TopBarOfPostsState extends State<TopBarOfPosts>
+    with TickerProviderStateMixin {
+  late final AnimationController _controller = AnimationController(
+    duration: const Duration(seconds: 2),
+    vsync: this,
+  )..repeat(reverse: true);
+  late final Animation<double> _animation = CurvedAnimation(
+    parent: _controller,
+    curve: Curves.easeIn,
+  );
+
   final _isiniti = true;
 
   var _isloading = false;
@@ -38,7 +48,7 @@ class _TopBarOfPostsState extends State<TopBarOfPosts> {
               });
             });
       } catch (error) {
-        print(error);
+        // print(error);
         setState(() {
           justTry = true;
         });
@@ -52,7 +62,7 @@ class _TopBarOfPostsState extends State<TopBarOfPosts> {
                   });
                 });
       } catch (error) {
-        print(error);
+        // print(error);
         setState(() {
           justTry = true;
         });
@@ -60,6 +70,12 @@ class _TopBarOfPostsState extends State<TopBarOfPosts> {
     }
     _isloading = false;
     super.didChangeDependencies();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -73,7 +89,7 @@ class _TopBarOfPostsState extends State<TopBarOfPosts> {
               : Stack(
                   children: [
                     Container(
-                      height: widget.size.height * 0.25 - 30,
+                      height: widget.size.height * 0.25 - 50,
                       decoration: const BoxDecoration(
                         color: kPrimaryDark,
                         borderRadius: BorderRadius.only(
@@ -91,7 +107,7 @@ class _TopBarOfPostsState extends State<TopBarOfPosts> {
                             style: const TextStyle(
                               fontSize: 28,
                               fontWeight: FontWeight.bold,
-                              color: Colors.white,
+                              color: Color.fromARGB(248, 255, 255, 255),
                             ),
                           ),
                         ),
@@ -100,8 +116,13 @@ class _TopBarOfPostsState extends State<TopBarOfPosts> {
                               builder: (context, photos, _) => SizedBox(
                                     height: 60,
                                     width: 60,
-                                    child: ClipOval(
-                                      child: Image.network(photos.items[3].url),
+                                    child: FadeTransition(
+                                      opacity: _animation,
+                                      alwaysIncludeSemantics: true,
+                                      child: ClipOval(
+                                        child:
+                                            Image.network(photos.items[3].url),
+                                      ),
                                     ),
                                   )),
                         ),
@@ -120,9 +141,9 @@ class _TopBarOfPostsState extends State<TopBarOfPosts> {
                           borderRadius: BorderRadius.circular(36),
                           boxShadow: const [
                             BoxShadow(
-                              color: Colors.black54,
+                              color: Colors.black,
                               offset: Offset(0, 10),
-                              blurRadius: 60,
+                              blurRadius: 25,
                             ),
                           ],
                         ),
