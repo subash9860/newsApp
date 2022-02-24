@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/comments.dart';
 import '../providers/posts.dart';
+import '../constants/colors.dart';
+// import 'package:yipl_android_list_me/models/post.dart';
+import '../widgets/top_of_post_detail.dart';
 
 class PostDetailsScreen extends StatefulWidget {
   const PostDetailsScreen({Key? key}) : super(key: key);
@@ -17,6 +21,18 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
   final _commentController = TextEditingController();
   final _scrollController = ScrollController();
 
+  String toCapilized(String input) {
+    final List<String> splitStr = input.split(' ');
+    for (int i = 0; i < splitStr.length; i++) {
+      splitStr[i] =
+          '${splitStr[i][0].toUpperCase()}${splitStr[i].substring(1)}';
+    }
+    final output = splitStr.join(' ');
+    return output;
+  }
+
+  String firstLettercapitalize(String s) => s[0].toUpperCase() + s.substring(1);
+
   @override
   Widget build(BuildContext context) {
     // postID is passed from the Post screen with the postID as a argument in the route name
@@ -27,42 +43,39 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
 
     // Fetching comment by postID from the comments.dart file
     Provider.of<Comments>(context, listen: false).fetchComments(postID);
-
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Post Details"),
-      ),
       body: Column(
-        children: <Widget>[
-          const SizedBox(height: 10),
-          Text("Post Title: ${post.title}",
-              style: const TextStyle(fontSize: 20)),
-          const SizedBox(height: 10),
-          Text("Post Body: ${post.body}", style: const TextStyle(fontSize: 18)),
-          const SizedBox(height: 30),
-          const Text('Comments', style: TextStyle(fontSize: 20)),
-          const SizedBox(height: 10),
-          Expanded(
-            child: Consumer<Comments>(
-              builder: (ctx, comments, _) => ListView.builder(
-                controller: _scrollController,
-                itemCount: comments.items.length,
-                itemBuilder: (ctx, i) => ListTile(
-                  title: Card(
-                      margin: const EdgeInsets.all(10),
-                      child: Text(comments.items[i].body,
-                          style: const TextStyle(fontSize: 18))),
-                ),
-              ),
-            ),
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          topOfPostDetail(context, size, toCapilized(post.title)),
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 40, vertical: 5),
+            width: size.width * 0.86,
+            child: Text(firstLettercapitalize(post.body).replaceAll("\n", " "),
+                style: GoogleFonts.roboto(
+                    fontSize: 19,
+                    color: Colors.black87,
+                    fontWeight: FontWeight.w500)),
           ),
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 40),
+            child: Chip(
+                label: Text("Comments",
+                    style: GoogleFonts.roboto(
+                        fontSize: 22,
+                        color: Colors.black87,
+                        fontWeight: FontWeight.bold))),
+          ),
+          _listOfComments(),
           Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                height: 50,
-                width: 300,
-                margin: const EdgeInsets.only(bottom: 20),
-                child: Stack(children: [
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              height: 50,
+              width: 300,
+              margin: const EdgeInsets.only(bottom: 10),
+              child: Stack(
+                children: [
                   TextField(
                     controller: _commentController,
                     onTap: (() {
@@ -72,46 +85,75 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                           curve: Curves.ease);
                     }),
                     decoration: InputDecoration(
-                        fillColor: Colors.grey[150],
-                        filled: true,
-                        contentPadding: const EdgeInsets.all(18),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                            borderSide: BorderSide.none),
-                        hintText: "Add a comment",
-                        hintStyle: const TextStyle(
-                          color: Colors.black54,
-                        )),
+                      fillColor: Colors.grey[400],
+                      filled: true,
+                      contentPadding: const EdgeInsets.all(18),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide: BorderSide.none),
+                      hintText: "Add a comment",
+                      hintStyle: const TextStyle(
+                        color: Colors.black,
+                      ),
+                    ),
                   ),
                   Positioned(
-                      right: 8,
-                      bottom: 8,
-                      child: Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                          color: Colors.blue[600],
-                          shape: BoxShape.circle,
+                    right: 8,
+                    bottom: 8,
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 10),
+                      child: IconButton(
+                        icon: const Icon(
+                          Icons.send,
+                          color: kPrimaryDark,
+                          size: 30,
                         ),
-                        child: IconButton(
-                          icon: const Icon(
-                            Icons.send,
-                            color: Colors.white,
-                            size: 30,
-                          ),
-                          onPressed: () {
-                            if (_commentController.text.isNotEmpty) {
-                              // print(_commentController.text);
-                              Provider.of<Comments>(context, listen: false)
-                              .addComment(postID, _commentController.text);
-                              _commentController.clear();
-                            }
-                          },
-                        ),
-                      ))
-                ]),
-              )),
+                        onPressed: () {
+                          if (_commentController.text.isNotEmpty) {
+                            // print(_commentController.text);
+                            Provider.of<Comments>(context, listen: false)
+                                .addComment(postID, _commentController.text);
+                            _commentController.clear();
+                          }
+                        },
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
         ],
+      ),
+    );
+  }
+
+  Widget _listOfComments() {
+    return Expanded(
+      child: Consumer<Comments>(
+        builder: (ctx, comments, _) => ListView.builder(
+          controller: _scrollController,
+          itemCount: comments.items.length,
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+          physics: const ScrollPhysics(
+            parent:
+                BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+          ),
+          itemBuilder: (ctx, i) => Card(
+            elevation: 5,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            color: Colors.grey[200],
+            margin: const EdgeInsets.all(10),
+            child: Text(
+              comments.items[i].body.replaceAll("\n", " "),
+              style: GoogleFonts.roboto(
+                  fontSize: 18,
+                  color: Colors.black87,
+                  fontWeight: FontWeight.w500),
+            ),
+          ),
+        ),
       ),
     );
   }

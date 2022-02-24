@@ -42,6 +42,8 @@ class _PostsScreenState extends State<PostsScreen> {
     super.didChangeDependencies();
   }
 
+  String capitalize(String s) => s[0].toUpperCase() + s.substring(1);
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -95,8 +97,13 @@ class _PostsScreenState extends State<PostsScreen> {
                                 focusColor: kPrimary,
                                 hoverColor: kPrimary,
                                 splashColor: kPrimary,
-                                child: postCard(size, i, context,
-                                    posts.items[i].title, posts.items[i].body),
+                                child: postCard(
+                                    size,
+                                    i,
+                                    context,
+                                    posts.items[i].title.replaceAll("\n", " "),
+                                    capitalize(posts.items[i].body)
+                                        .replaceAll("\n", " ")),
                                 onTap: () {
                                   Navigator.pushNamed(
                                       context, PostDetailsScreen.routeName,

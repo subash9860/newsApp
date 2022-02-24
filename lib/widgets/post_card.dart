@@ -3,6 +3,15 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../constants/colors.dart';
 
+String toCapilized(String input) {
+  final List<String> splitStr = input.split(' ');
+  for (int i = 0; i < splitStr.length; i++) {
+    splitStr[i] = '${splitStr[i][0].toUpperCase()}${splitStr[i].substring(1)}';
+  }
+  final output = splitStr.join(' ');
+  return output;
+}
+
 Widget postCard(
         Size size, int i, BuildContext context, String title, String body) =>
     Container(
@@ -41,8 +50,7 @@ Widget postCard(
             child: SizedBox(
               width: size.width * 0.64,
               child: Text(
-                title,
-                // posts.items[i].title,
+                toCapilized(title),
                 softWrap: true,
                 overflow: TextOverflow.ellipsis,
                 style: GoogleFonts.lato(
@@ -58,15 +66,13 @@ Widget postCard(
             top: 40,
             left: size.width * 0.30,
             child: SizedBox(
-              width: size.width * 0.64,
+              width: size.width * 0.60,
+              height: size.height * 0.05,
               child: Text(
                 body,
-                // posts.items[i].body,
                 softWrap: true,
-                overflow: TextOverflow.ellipsis,
                 style: GoogleFonts.lato(
                   color: const Color.fromARGB(164, 0, 0, 0),
-                  // fontSize: 16,
                   fontWeight: FontWeight.bold,
                   wordSpacing: 3,
                 ),
