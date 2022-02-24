@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:yipl_android_list_me/screens/post_details_screen.dart';
 
 import '../constants/colors.dart';
-import '../screens/post_details_screen.dart';
 import '../providers/posts.dart';
-import '../widgets/top_bar_of_posts.dart';
+import '../widgets/post_card.dart';
+import '../widgets/top_of_post_screen.dart';
 
 class PostsScreen extends StatefulWidget {
   const PostsScreen({Key? key}) : super(key: key);
@@ -60,9 +60,9 @@ class _PostsScreenState extends State<PostsScreen> {
                   ? const Center(child: Text('Something went wrong'))
                   : Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        TopBarOfPosts(size: size),
+                        topOfpostScreen(size),
                         SizedBox(
                           height: size.height * 0.015,
                         ),
@@ -71,7 +71,7 @@ class _PostsScreenState extends State<PostsScreen> {
                               horizontal: size.width * 0.05,
                               vertical: size.height * 0.01),
                           child: const Text(
-                            "Lists of posts",
+                            "Recent News",
                             textAlign: TextAlign.left,
                             style: TextStyle(
                               fontSize: 26,
@@ -80,86 +80,34 @@ class _PostsScreenState extends State<PostsScreen> {
                             ),
                           ),
                         ),
-                        ListOfPosts(size: size),
+                        Expanded(
+                          child: Consumer<Posts>(
+                            builder: (ctx, posts, _) => ListView.separated(
+                              separatorBuilder: (context, index) =>
+                                  const Divider(),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: size.width * 0.05),
+                              physics: const ScrollPhysics(
+                                  parent: BouncingScrollPhysics()),
+                              shrinkWrap: true,
+                              itemCount: posts.items.length,
+                              itemBuilder: (ctx, i) => InkWell(
+                                focusColor: kPrimary,
+                                hoverColor: kPrimary,
+                                splashColor: kPrimary,
+                                child: postCard(size, i, context,
+                                    posts.items[i].title, posts.items[i].body),
+                                onTap: () {
+                                  Navigator.pushNamed(
+                                      context, PostDetailsScreen.routeName,
+                                      arguments: posts.items[i].id);
+                                },
+                              ),
+                            ),
+                          ),
+                        )
                       ],
                     ),
-        ),
-      ),
-    );
-  }
-}
-
-class ListOfPosts extends StatelessWidget {
-  const ListOfPosts({
-    Key? key,
-    required this.size,
-  }) : super(key: key);
-
-  final Size size;
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Consumer<Posts>(
-        builder: (ctx, posts, _) => ListView.builder(
-          padding: EdgeInsets.symmetric(horizontal: size.width * 0.05),
-          physics: const ScrollPhysics(parent: BouncingScrollPhysics()),
-          // itemExtent: 20.0 * size.height / 100,
-          shrinkWrap: true,
-          itemCount: posts.items.length,
-          itemBuilder: (ctx, i) => Container(
-            margin: EdgeInsets.only(bottom: size.height * 0.02),
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: const Color.fromARGB(234, 253, 251, 251),
-              borderRadius: BorderRadius.circular(20),
-              boxShadow: const [
-                BoxShadow(
-                  color: Colors.black26,
-                  offset: Offset(0, 10),
-                  blurRadius: 10,
-                ),
-              ],
-            ),
-            child: ListTile(
-              visualDensity: VisualDensity.standard,
-              isThreeLine: true,
-              contentPadding:
-                  const EdgeInsets.symmetric(horizontal: 5, vertical: 3),
-              leading: FittedBox(
-                child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: const Image(
-                        image: NetworkImage(
-                            'https://cdn.dribbble.com/users/642793/screenshots/6577615/attachments/1405726/issue_9_inside_1.jpg?compress=1&resize=900x800&vertical=top'))),
-              ),
-              title: Text(posts.items[i].title.toUpperCase(),
-                  softWrap: true,
-                  overflow: TextOverflow.ellipsis,
-                  style: GoogleFonts.lato(
-                    color: const Color.fromARGB(207, 0, 0, 0),
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    wordSpacing: 3,
-                  )),
-              subtitle: Text(posts.items[i].body,
-                  softWrap: true,
-                  overflow: TextOverflow.ellipsis,
-                  style: GoogleFonts.lato(
-                    color: const Color.fromARGB(164, 0, 0, 0),
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                    wordSpacing: 3,
-                  )),
-              trailing: const Icon(Icons.arrow_forward, color: kPrimary),
-              selectedColor: kPrimary,
-              selected: true,
-              onTap: () {
-                Navigator.pushNamed(context, PostDetailsScreen.routeName,
-                    arguments: posts.items[i].id);
-              },
-            ),
-          ),
         ),
       ),
     );
