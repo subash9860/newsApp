@@ -41,7 +41,7 @@ Widget topOfPostDetail(BuildContext context, Size size, String title) {
             child: SizedBox(
               height: size.height * 0.25,
               width: size.width * 0.89,
-              child: Text(title.replaceAll("\n", ""),
+              child: Text(title.replaceAll("\n", " "),
                   style: GoogleFonts.roboto(
                     fontSize: 24,
                     color: Colors.white,

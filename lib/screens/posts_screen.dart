@@ -93,10 +93,7 @@ class _PostsScreenState extends State<PostsScreen> {
                                   parent: BouncingScrollPhysics()),
                               shrinkWrap: true,
                               itemCount: posts.items.length,
-                              itemBuilder: (ctx, i) => InkWell(
-                                focusColor: kPrimary,
-                                hoverColor: kPrimary,
-                                splashColor: kPrimary,
+                              itemBuilder: (ctx, i) => GestureDetector(
                                 child: postCard(
                                     size,
                                     i,

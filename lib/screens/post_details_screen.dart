@@ -43,6 +43,7 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
 
     // Fetching comment by postID from the comments.dart file
     Provider.of<Comments>(context, listen: false).fetchComments(postID);
+
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Column(
@@ -67,7 +68,37 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                         color: Colors.black87,
                         fontWeight: FontWeight.bold))),
           ),
-          _listOfComments(),
+          Expanded(
+            child: Consumer<Comments>(
+              builder: (ctx, comments, _) => ListView.builder(
+                controller: _scrollController,
+                itemCount: comments.items.length,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20),
+                physics: const ScrollPhysics(
+                  parent: BouncingScrollPhysics(
+                      parent: AlwaysScrollableScrollPhysics()),
+                ),
+                itemBuilder: (ctx, i) => Card(
+                  elevation: 6,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12)),
+                  color: Colors.grey[200],
+                  margin: const EdgeInsets.all(10),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Text(
+                      comments.items[i].body.replaceAll("\n", " "),
+                      style: GoogleFonts.roboto(
+                          fontSize: 18,
+                          color: Colors.black87,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
@@ -85,7 +116,7 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                           curve: Curves.ease);
                     }),
                     decoration: InputDecoration(
-                      fillColor: Colors.grey[400],
+                      fillColor: Colors.grey[300],
                       filled: true,
                       contentPadding: const EdgeInsets.all(18),
                       border: OutlineInputBorder(
@@ -98,11 +129,10 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                     ),
                   ),
                   Positioned(
-                    right: 8,
-                    bottom: 8,
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 10),
-                      child: IconButton(
+                    right: 0,
+                    bottom: 2,
+                    child: 
+                      IconButton(
                         icon: const Icon(
                           Icons.send,
                           color: kPrimaryDark,
@@ -116,7 +146,6 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                             _commentController.clear();
                           }
                         },
-                      ),
                     ),
                   )
                 ],
@@ -124,36 +153,6 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _listOfComments() {
-    return Expanded(
-      child: Consumer<Comments>(
-        builder: (ctx, comments, _) => ListView.builder(
-          controller: _scrollController,
-          itemCount: comments.items.length,
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
-          physics: const ScrollPhysics(
-            parent:
-                BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-          ),
-          itemBuilder: (ctx, i) => Card(
-            elevation: 5,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            color: Colors.grey[200],
-            margin: const EdgeInsets.all(10),
-            child: Text(
-              comments.items[i].body.replaceAll("\n", " "),
-              style: GoogleFonts.roboto(
-                  fontSize: 18,
-                  color: Colors.black87,
-                  fontWeight: FontWeight.w500),
-            ),
-          ),
-        ),
       ),
     );
   }
