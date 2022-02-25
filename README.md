@@ -1,64 +1,32 @@
 # List me Flutter Project for Intership Challenge
 
-## Task
+I have made a news app which contain news (post of jsonplaceholder api), theirs comment, user's profile.
 
-- [x] If you haven’t already, take a [git class in codeschool](https://www.codeschool.com/courses/try-git).
-- [x] Once complete, create a private repo called “yipl-android-list-me”” in [bitbucket](https://bitbucket.org)
-- [x] Solve the problem detailed below
-- [x] Push your code to the repo (make sure that you have multiple commits with proper messages)
-- [ ] Invite internship-bitbucket@yipl.com.np to that particular private repo
-- [ ] Submit your application
+User can read news, view comments and add comment in the new post too. We can also see all the user of the news app and can also view their profile.
 
-### Problem
+Profile of user comatain user's info, post, albums, photo and todo list also.
 
-Implement a simple listing and detail showcase application using the following APIs:
+Here, i have assume that user 1 form json api have been login and viewing his/her profile. so, User 1 can add delete, update of todo list of his only.
 
-#### Tasks
+## Task done
 
-- [x] A screen to list all the posts.
-  - <https://jsonplaceholder.typicode.com/posts>
-- [x] A post detail screen which have list of comments.
-  - <https://jsonplaceholder.typicode.com/posts/{post_id}/comments>
-- [x] Add new comment by using POST request to the api. You can use any static userId to make the request.
-  - <https://jsonplaceholder.typicode.com/posts/{post_id}/comments>
+1. A screen to list all the posts.
+2. A post detail screen which have list of comments.
+3. Show list of users
+4. Show the users posts, albums and photos.
+5. The posts, albums and todos should be either in Tabs or BottomNavigation.
+6. Implement add, delete, update of todos for user.
 
-Checkout [JSONPlaceholder](https://jsonplaceholder.typicode.com/) for more details and also use their [guide](https://jsonplaceholder.typicode.com/guide/).
+### Implemented
 
-Once loaded, the data (both listing and detail) should persist. Any persistence mechanism can be used, i.e., cache or database.
+1. Object Oriented approach has been implemented.
+2. Naming conventions for Widgets, files, function are according to flutter recommanded.
+3. Separation use of widgets.
+4. Used Provider as a state management.
+5. Used animations.
+6. added readme file which contains screenshots and a short description of your application.
+7. Used of 3rd party libraries meaningfully.
 
-#### NOTE
+## Snapshot
 
-- You can build application using native android or Flutter.
-
-## Design is important, but can be designed as you wish
-
-### Flutter
-
-#### Criteria for judgement
-
-- [x] Object Oriented approach used in project.
-- [x] Proper use of naming conventions for Widgets, files, function.
-- [x] Proper code and widget separation and use of widgets.
-
-#### Bonus points
-
-- [x] Proper state management
-- [x] Use of proper animations.
-- [x] If you write a readme file which contains screenshots and a short description of your application.
-- [x] Use of 3rd party libraries meaningfully.
-
-#### Extra features
-
-These are optional features. Implementing them will give you extra points.
-
-- [x] Show list of users
-  - <https://jsonplaceholder.typicode.com/users>
-- [x] Show the users posts, albums and photos.
-  - Posts: <https://jsonplaceholder.typicode.com/users/{user_id}/posts>
-  - Todos: <https://jsonplaceholder.typicode.com/users/{user_id}/todos>
-  - Albums: <https://jsonplaceholder.typicode.com/users/{user_id}/albums>
-  - Photos: <https://jsonplaceholder.typicode.com/albums/{album_id}/photos>
-- [x] The posts, albums and todos should be either in Tabs or BottomNavigation.
-- [ ] Implement add, delete, update of todos for user.
-
-- <https://jsonplaceholder.typicode.com/guide>
+<img height="480px" src="./screenshots/home_screen.png"><img height="480px" src="./screenshots/post_detail_screen.png"><img height="480px" src="./screenshots/comment_Added.png"><img height="480px" src="./screenshots/user_list.png"><img height="480px" src="./screenshots/user_detail.png">
