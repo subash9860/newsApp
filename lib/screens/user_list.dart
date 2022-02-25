@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/users.dart';
@@ -47,6 +48,8 @@ class _UserListState extends State<UserList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+      elevation: 5,
+        centerTitle: true,
         title: const Text('List of Users'),
       ),
       body: Center(
@@ -55,15 +58,46 @@ class _UserListState extends State<UserList> {
             : justTry
                 ? const Text('Something went wrong')
                 : Consumer<Users>(
-                    builder: (context, users, child) => ListView.builder(
+                    builder: (context, users, child) => ListView.separated(
+                      separatorBuilder: (_, index) => const SizedBox(),
+                      addRepaintBoundaries: true,
+                      addAutomaticKeepAlives: true,
+                      addSemanticIndexes: true,
+                      padding: const EdgeInsets.all(10),
+                      physics: const ScrollPhysics(
+                        parent: BouncingScrollPhysics(
+                          parent: AlwaysScrollableScrollPhysics(),
+                        ),
+                      ),
                       itemCount: users.items.length,
                       itemBuilder: (context, index) => ListTile(
-                        title: Text(users.items[index].name),
+                        visualDensity: VisualDensity.comfortable,
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 5,
+                        ),
+                        leading: const CircleAvatar(child: Icon(Icons.person)),
+                        title: Text(
+                          users.items[index].name,
+                          style: GoogleFonts.roboto(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        subtitle: Text(
+                          users.items[index].username,
+                          style: GoogleFonts.roboto(
+                            color: Colors.grey[600],
+                            fontSize: 15,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        trailing: const Icon(Icons.arrow_forward_ios_outlined),
                         onTap: () {
                           Navigator.of(context).pushNamed(
                             UserDetailsScreen.routeName,
-                            arguments: users.items[index].id, 
-                            );
+                            arguments: users.items[index].id,
+                          );
                         },
                       ),
                     ),
