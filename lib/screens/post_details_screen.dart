@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../providers/comments.dart';
 import '../providers/posts.dart';
-import '../constants/colors.dart';
+// import '../constants/colors.dart';
 // import 'package:yipl_android_list_me/models/post.dart';
 import '../widgets/top_of_post_detail.dart';
 
@@ -135,7 +135,7 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                       IconButton(
                         icon: const Icon(
                           Icons.send,
-                          color: kPrimaryDark,
+                          color: Color.fromARGB(221, 45, 170, 187),
                           size: 30,
                         ),
                         onPressed: () {

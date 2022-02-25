@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:yipl_android_list_me/screens/post_details_screen.dart';
 
+import '../widgets/list_of_post.dart';
+// import '../screens/post_details_screen.dart';
 import '../constants/colors.dart';
 import '../providers/posts.dart';
-import '../widgets/post_card.dart';
+// import '../widgets/post_card.dart';
 import '../widgets/top_of_post_screen.dart';
 
 class PostsScreen extends StatefulWidget {
@@ -42,18 +43,12 @@ class _PostsScreenState extends State<PostsScreen> {
     super.didChangeDependencies();
   }
 
-  String capitalize(String s) => s[0].toUpperCase() + s.substring(1);
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: kGrey,
-      appBar: AppBar(
-        centerTitle: true,
-        elevation: 0,
-        toolbarHeight: 7,
-      ),
       body: SafeArea(
         child: Container(
           child: _isloading
@@ -82,34 +77,36 @@ class _PostsScreenState extends State<PostsScreen> {
                             ),
                           ),
                         ),
-                        Expanded(
-                          child: Consumer<Posts>(
-                            builder: (ctx, posts, _) => ListView.separated(
-                              separatorBuilder: (context, index) =>
-                                  const Divider(),
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: size.width * 0.05),
-                              physics: const ScrollPhysics(
-                                  parent: BouncingScrollPhysics()),
-                              shrinkWrap: true,
-                              itemCount: posts.items.length,
-                              itemBuilder: (ctx, i) => GestureDetector(
-                                child: postCard(
-                                    size,
-                                    i,
-                                    context,
-                                    posts.items[i].title.replaceAll("\n", " "),
-                                    capitalize(posts.items[i].body)
-                                        .replaceAll("\n", " ")),
-                                onTap: () {
-                                  Navigator.pushNamed(
-                                      context, PostDetailsScreen.routeName,
-                                      arguments: posts.items[i].id);
-                                },
-                              ),
-                            ),
-                          ),
-                        )
+
+                        const ListOfPost(),
+                        // Expanded(
+                        //   child: Consumer<Posts>(
+                        //     builder: (ctx, posts, _) => ListView.separated(
+                        //       separatorBuilder: (context, index) =>
+                        //           const Divider(),
+                        //       padding: EdgeInsets.symmetric(
+                        //           horizontal: size.width * 0.05),
+                        //       physics: const ScrollPhysics(
+                        //           parent: BouncingScrollPhysics()),
+                        //       shrinkWrap: true,
+                        //       itemCount: posts.items.length,
+                        //       itemBuilder: (ctx, i) => GestureDetector(
+                        //         child: postCard(
+                        //             size,
+                        //             i,
+                        //             context,
+                        //             posts.items[i].title.replaceAll("\n", " "),
+                        //             capitalize(posts.items[i].body)
+                        //                 .replaceAll("\n", " ")),
+                        //         onTap: () {
+                        //           Navigator.pushNamed(
+                        //               context, PostDetailsScreen.routeName,
+                        //               arguments: posts.items[i].id);
+                        //         },
+                        //       ),
+                        //     ),
+                        //   ),
+                        // )
                       ],
                     ),
         ),
