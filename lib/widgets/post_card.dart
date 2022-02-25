@@ -12,6 +12,8 @@ String toCapilized(String input) {
   return output;
 }
 
+String capitalize(String s) => s[0].toUpperCase() + s.substring(1);
+
 Widget postCard(
         Size size, int i, BuildContext context, String title, String body) =>
     Container(
@@ -69,7 +71,7 @@ Widget postCard(
               width: size.width * 0.60,
               height: size.height * 0.05,
               child: Text(
-                body,
+                capitalize(body),
                 softWrap: true,
                 style: GoogleFonts.lato(
                   color: const Color.fromARGB(164, 0, 0, 0),

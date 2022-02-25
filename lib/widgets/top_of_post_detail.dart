@@ -12,31 +12,23 @@ Widget topOfPostDetail(BuildContext context, Size size, String title) {
         children: [
           Positioned(
             top: 25,
-            left: 20,
-            child: Container(
-              decoration: const BoxDecoration(
-                color: kPrimary,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(30),
-                  topRight: Radius.circular(30),
-                  bottomLeft: Radius.circular(30),
-                  bottomRight: Radius.circular(30),
-                ),
-              ),
+            left: 10,
+            child: CircleAvatar(
+              backgroundColor: const Color.fromARGB(132, 223, 219, 219),
               child: Padding(
-                padding: const EdgeInsets.only(left: 6.0),
+                padding: const EdgeInsets.symmetric(vertical: 1, horizontal: 4),
                 child: IconButton(
-                    alignment: Alignment.center,
-                    onPressed: () => Navigator.pop(context),
-                    icon: const Icon(
-                      Icons.arrow_back_ios,
-                      color: Colors.white,
-                    )),
+                  onPressed: () => Navigator.pop(context),
+                  icon: const Icon(
+                    Icons.arrow_back_ios,
+                    color: Colors.white,
+                  ),
+                ),
               ),
             ),
           ),
           Positioned(
-            top: 75,
+            top: 60,
             left: 50,
             child: SizedBox(
               height: size.height * 0.25,
@@ -50,7 +42,7 @@ Widget topOfPostDetail(BuildContext context, Size size, String title) {
             ),
           ),
           Positioned(
-              top: 150,
+              top: 145,
               left: 50,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -72,7 +64,7 @@ Widget topOfPostDetail(BuildContext context, Size size, String title) {
                 ],
               )),
           Positioned(
-            top: size.height * 0.26,
+            top: size.height * 0.25,
             child: Container(
               height: size.height * 0.2,
               width: size.width,
@@ -87,7 +79,7 @@ Widget topOfPostDetail(BuildContext context, Size size, String title) {
             ),
           ),
           Positioned(
-            top: size.height * 0.26,
+            top: size.height * 0.25,
             left: 40,
             child: Chip(
               label: Text("Description:",
