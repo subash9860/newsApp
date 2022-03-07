@@ -4,8 +4,6 @@ import 'package:provider/provider.dart';
 
 import '../providers/comments.dart';
 import '../providers/posts.dart';
-// import '../constants/colors.dart';
-// import 'package:yipl_android_list_me/models/post.dart';
 import '../widgets/top_of_post_detail.dart';
 
 class PostDetailsScreen extends StatefulWidget {
@@ -43,7 +41,6 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
 
     // Fetching comment by postID from the comments.dart file
     Provider.of<Comments>(context, listen: false).fetchComments(postID);
-
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Column(
@@ -72,9 +69,9 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
             child: Consumer<Comments>(
               builder: (ctx, comments, _) => ListView.builder(
                 controller: _scrollController,
-                itemCount: comments.items.length,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20),
+                itemCount:
+                    comments.items.length + comments.itemsOfSharePref.length,
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 physics: const ScrollPhysics(
                   parent: BouncingScrollPhysics(
                       parent: AlwaysScrollableScrollPhysics()),
@@ -87,13 +84,22 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                   margin: const EdgeInsets.all(10),
                   child: Padding(
                     padding: const EdgeInsets.all(10.0),
-                    child: Text(
-                      comments.items[i].body.replaceAll("\n", " "),
-                      style: GoogleFonts.roboto(
-                          fontSize: 18,
-                          color: Colors.black87,
-                          fontWeight: FontWeight.w500),
-                    ),
+                    child: (i < comments.items.length
+                        ? Text(
+                            comments.items[i].body.replaceAll("\n", " "),
+                            style: GoogleFonts.roboto(
+                                fontSize: 18,
+                                color: Colors.black87,
+                                fontWeight: FontWeight.w500),
+                          )
+                        : Text(
+                            comments.itemsOfSharePref[i - comments.items.length]
+                                .body,
+                            style: GoogleFonts.roboto(
+                                fontSize: 18,
+                                color: Colors.black87,
+                                fontWeight: FontWeight.w500),
+                          )),
                   ),
                 ),
               ),
@@ -131,21 +137,19 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                   Positioned(
                     right: 0,
                     bottom: 2,
-                    child: 
-                      IconButton(
-                        icon: const Icon(
-                          Icons.send,
-                          color: Color.fromARGB(221, 45, 170, 187),
-                          size: 30,
-                        ),
-                        onPressed: () {
-                          if (_commentController.text.isNotEmpty) {
-                            // print(_commentController.text);
-                            Provider.of<Comments>(context, listen: false)
-                                .addComment(postID, _commentController.text);
-                            _commentController.clear();
-                          }
-                        },
+                    child: IconButton(
+                      icon: const Icon(
+                        Icons.send,
+                        color: Color.fromARGB(221, 45, 170, 187),
+                        size: 30,
+                      ),
+                      onPressed: () {
+                        if (_commentController.text.isNotEmpty) {
+                          Provider.of<Comments>(context, listen: false)
+                              .addComment(postID, _commentController.text);
+                          _commentController.clear();
+                        }
+                      },
                     ),
                   )
                 ],

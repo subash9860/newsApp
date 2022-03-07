@@ -14,4 +14,14 @@ class Comment with ChangeNotifier {
     required this.email,
     required this.body,
   });
+  // to map
+  Map<String, dynamic> toMap() {
+    return {
+      'postId': postId,
+      'id': id,
+      'name': name,
+      'email': email,
+      'body': body,
+    };
+  }
 }
