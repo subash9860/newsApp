@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../widgets/albums_list.dart';
-import '../widgets/photos_list.dart';
 import '../widgets/todolist.dart';
 import '../widgets/user_post.dart';
-import '../providers/photos.dart';
 import '../providers/todos.dart';
 import '../providers/users.dart';
 import '../providers/posts.dart';
@@ -45,13 +43,10 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
     // for user's albums
     Provider.of<Albums>(context, listen: false).fetchAndSetAlbums(userID);
 
-    // for user's photos
-    Provider.of<Photos>(context, listen: false).fetchAndSetPhotos(userID);
-
     return Scaffold(
       body: SafeArea(
         child: DefaultTabController(
-          length: 4,
+          length: 3,
           child: NestedScrollView(
             headerSliverBuilder: (context, _) {
               return [
@@ -85,12 +80,6 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                     ),
                     Tab(
                       icon: Icon(
-                        Icons.photo_album_outlined,
-                        color: Colors.black,
-                      ),
-                    ),
-                    Tab(
-                      icon: Icon(
                         Icons.photo_library_outlined,
                         color: Colors.black,
                       ),
@@ -108,7 +97,6 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                     children: [
                       UserPost(),
                       ListofAlbums(),
-                      ListOfPhotos(),
                       Todolist(),
                     ],
                   ),

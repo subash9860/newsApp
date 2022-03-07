@@ -8,9 +8,9 @@ class Photos with ChangeNotifier {
   List<Photo> _items = [];
   List<Photo> get items => [..._items];
 
-  Future<void> fetchAndSetPhotos(int userID) async {
+  Future<void> fetchAndSetPhotos(int albumID) async {
     final response = await http.get(
-        Uri.parse('https://jsonplaceholder.typicode.com/albums/$userID/photos'));
+        Uri.parse('https://jsonplaceholder.typicode.com/albums/$albumID/photos'));
 
     // if the server returns with a 200 OK response, parse the JSON
     if (response.statusCode == 200) {
