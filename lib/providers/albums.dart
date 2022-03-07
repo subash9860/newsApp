@@ -17,11 +17,11 @@ class Albums with ChangeNotifier {
       final extractedData = json.decode(response.body);
       final List<Album> loadedAlbum = [];
       // iterate through the extracted data and create a albums object for each one
-      extractedData.forEach((todoData) {
+      extractedData.forEach((albumData) {
         loadedAlbum.add(Album(
-          id: todoData['id'],
-          title: todoData['title'],
-          userId: todoData['userId'],
+          id: albumData['id'],
+          title: albumData['title'],
+          userId: albumData['userId'],
         ));
       });
       _items = loadedAlbum;

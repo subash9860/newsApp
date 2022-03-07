@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../widgets/list_of_post.dart';
-// import '../screens/post_details_screen.dart';
+import '../widgets/all_post.dart';
 import '../constants/colors.dart';
 import '../providers/posts.dart';
-// import '../widgets/post_card.dart';
 import '../widgets/top_of_post_screen.dart';
 
 class PostsScreen extends StatefulWidget {
@@ -43,7 +41,6 @@ class _PostsScreenState extends State<PostsScreen> {
     super.didChangeDependencies();
   }
 
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -77,36 +74,7 @@ class _PostsScreenState extends State<PostsScreen> {
                             ),
                           ),
                         ),
-
-                        const ListOfPost(),
-                        // Expanded(
-                        //   child: Consumer<Posts>(
-                        //     builder: (ctx, posts, _) => ListView.separated(
-                        //       separatorBuilder: (context, index) =>
-                        //           const Divider(),
-                        //       padding: EdgeInsets.symmetric(
-                        //           horizontal: size.width * 0.05),
-                        //       physics: const ScrollPhysics(
-                        //           parent: BouncingScrollPhysics()),
-                        //       shrinkWrap: true,
-                        //       itemCount: posts.items.length,
-                        //       itemBuilder: (ctx, i) => GestureDetector(
-                        //         child: postCard(
-                        //             size,
-                        //             i,
-                        //             context,
-                        //             posts.items[i].title.replaceAll("\n", " "),
-                        //             capitalize(posts.items[i].body)
-                        //                 .replaceAll("\n", " ")),
-                        //         onTap: () {
-                        //           Navigator.pushNamed(
-                        //               context, PostDetailsScreen.routeName,
-                        //               arguments: posts.items[i].id);
-                        //         },
-                        //       ),
-                        //     ),
-                        //   ),
-                        // )
+                        const AllPost(),
                       ],
                     ),
         ),

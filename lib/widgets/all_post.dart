@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../screens/post_details_screen.dart';
-// import '../constants/colors.dart';
 import '../providers/posts.dart';
 import '../widgets/post_card.dart';
-// import '../widgets/top_of_post_screen.dart';
 
-class ListOfPost extends StatelessWidget {
-  const ListOfPost({Key? key}) : super(key: key);
+class AllPost extends StatelessWidget {
+  const AllPost({Key? key}) : super(key: key);
 
   String capitalize(String s) => s[0].toUpperCase() + s.substring(1);
 
@@ -23,14 +21,13 @@ class ListOfPost extends StatelessWidget {
           physics: const ScrollPhysics(parent: BouncingScrollPhysics()),
           shrinkWrap: true,
           itemCount: posts.items.length,
-          itemBuilder: (ctx, i) => 
-          GestureDetector(
+          itemBuilder: (ctx, i) => GestureDetector(
             child: postCard(
                 MediaQuery.of(context).size,
                 i,
                 context,
                 posts.items[i].title.replaceAll("\n", " "),
-              posts.items[i].body.replaceAll("\n", " ")),
+                posts.items[i].body.replaceAll("\n", " ")),
             onTap: () {
               Navigator.pushNamed(context, PostDetailsScreen.routeName,
                   arguments: posts.items[i].id);
