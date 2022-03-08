@@ -29,4 +29,4 @@ Here, i have assume that user 1 form json api have been login and viewing his/he
 
 ## Snapshot
 
-<img height="480px" src="./screenshots/home_screen.png"><img height="480px" src="./screenshots/post_detail_screen.png"><img height="480px" src="./screenshots/comment_Added.png"><img height="480px" src="./screenshots/user_list.png"><img height="480px" src="./screenshots/user_detail.png">
+<img height="480px" src="./screenshots/home_screen.png"> <img height="480px" src="./screenshots/post_detail_screen.png"> <img height="480px" src="./screenshots/comment_Added.png"> <img height="480px" src="./screenshots/user_list.png"> <img height="480px" src="./screenshots/user_detail.png"> <img height="480px" src="./screenshots/user_albums.png"> <img height="480px" src="./screenshots/user_todo.png"> <img height="480px" src="./screenshots/user_profile.png"> 
