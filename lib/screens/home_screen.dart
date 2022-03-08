@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../screens/user_profile.dart';
 import '../screens/posts_screen.dart';
-import '../screens/user_detail.dart';
 import '../screens/user_list.dart';
 import '../constants/colors.dart';
 
@@ -18,8 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final screens = const [
     PostsScreen(),
     UserList(),
-    Center(child: Text('User Details')),
-    // UserDetailsScreen()
+    UserProfile(),
   ];
 
   @override
@@ -43,15 +42,9 @@ class _HomeScreenState extends State<HomeScreen> {
           selectedIndex: index,
           onDestinationSelected: (int index) {
             setState(() {
-              if(index == 2) {
-                Navigator.pushNamed(context, UserDetailsScreen.routeName, arguments:1);
-              } else {
-                this.index = index;
-              }
-              // this.index = index;
+              this.index = index;
             });
           },
-
           destinations: const [
             NavigationDestination(
               selectedIcon: Icon(Icons.home),

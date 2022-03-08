@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../models/user.dart';
 import '../widgets/albums_list.dart';
 import '../widgets/todolist.dart';
 import '../widgets/user_post.dart';
@@ -43,6 +44,20 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
     // for user's albums
     Provider.of<Albums>(context, listen: false).fetchAndSetAlbums(userID);
 
+    return UserScreenUi(user: user);
+  }
+}
+
+class UserScreenUi extends StatelessWidget {
+  const UserScreenUi({
+    Key? key,
+    required this.user,
+  }) : super(key: key);
+
+  final User user;
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: DefaultTabController(
@@ -54,11 +69,13 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                   delegate: SliverChildListDelegate(
                     [
                       UserInfo(
-                          name: user.name,
-                          email: user.email,
-                          phone: user.phone,
-                          address: user.address.city,
-                          work: user.company.name),
+                        name: user.name,
+                        email: user.email,
+                        phone: user.phone,
+                        address: user.address.city,
+                        work: user.company.name,
+                        // backButton: true,
+                      ),
                     ],
                   ),
                 ),

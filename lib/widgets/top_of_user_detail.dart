@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../widgets/data_on_table.dart';
 import '../constants/colors.dart';
 
-Widget topOfUserDetail(BuildContext context, String name, bool backButton,
+Widget topOfUserDetail(BuildContext context, String name,
     String email, String phone, String address, String work) {
   return SizedBox(
     height: MediaQuery.of(context).size.height * 0.278,
@@ -49,7 +49,7 @@ Widget topOfUserDetail(BuildContext context, String name, bool backButton,
             ),
           ),
         ),
-        if (backButton)
+        // if (backButton)
           Positioned(
             top: 0,
             left: 10,

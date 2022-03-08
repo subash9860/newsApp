@@ -31,4 +31,27 @@ class Todos with ChangeNotifier {
       throw Exception('Failed to load todos');
     }
   }
+
+  updateTodo(Todo todo) {
+    final index = _items.indexWhere((todoItem) => todoItem.id == todo.id);
+    if (index >= 0) {
+      _items[index] = todo;
+      notifyListeners();
+    }
+  }
+
+  addTodo(String title, bool completed, int userId) {
+    _items.add(Todo(
+      id: _items.length + 1,
+      title: title,
+      completed: completed,
+      userId: userId,
+    ));
+    notifyListeners();
+  }
+
+  deleteTodo(int id) {
+    _items.removeWhere((todo) => todo.id == id);
+    notifyListeners();
+  }
 }

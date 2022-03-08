@@ -20,6 +20,6 @@ class UserInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return topOfUserDetail(context, name, true, email, phone, address, work);
+    return topOfUserDetail(context, name, email, phone, address, work);
   }
 }
