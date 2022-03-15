@@ -1,4 +1,4 @@
-# List me Flutter Project for Intership Challenge
+# News like app
 
 I have made a news app which contain news (post of jsonplaceholder api), theirs comment, user's profile.
 
