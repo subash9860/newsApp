@@ -1,20 +1,18 @@
-# News like app
+# News app
 
-I have made a news app which contain news (post of jsonplaceholder api), theirs comment, user's profile.
+I have made a news app which contain news (post of jsonplaceholder api), comment, user's profile.
 
-User can read news, view comments and add comment in the new post too. We can also see all the user of the news app and can also view their profile.
+User can read news, view and add comment in the new post. We can also see all the user of the news app and can also view their profile.
 
-Profile of user comatain user's info, post, albums, photo and todo list also.
-
-Here, i have assume that user 1 form json api have been login and viewing his/her profile. so, User 1 can add delete, update of todo list of his only.
+Profile of user comatain user's info, post, albums of photo and todo list also.
 
 ## Task done
 
 1. A screen to list all the posts.
-2. A post detail screen which have list of comments.
+2. A post detail screen which have list of comments and post new comment in the post.
 3. Show list of users
-4. Show the users posts, albums and photos.
-5. The posts, albums and todos should be either in Tabs or BottomNavigation.
+4. Show the users posts, albums of photos and TODO list whic can be create, update, delete.
+5. The posts, albums and todos should be either in Tabs.
 6. Implement add, delete, update of todos for user.
 
 ### Implemented
